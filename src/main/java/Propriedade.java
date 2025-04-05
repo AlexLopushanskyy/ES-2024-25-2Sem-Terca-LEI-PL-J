@@ -1,4 +1,4 @@
-public class Propriedades {
+public class Propriedade {
     private String ID;
     private int OWNER;
     private String freguesia;
@@ -7,7 +7,7 @@ public class Propriedades {
     private double area;
     private double geometry;
 
-    public Propriedades(String id, int owner, String freguesia, String municipio, String ilha, double area, double geometry) {
+    public Propriedade(String id, int owner, String freguesia, String municipio, String ilha, double area, double geometry) {
         this.ID = id;
         this.OWNER = owner;
         this.freguesia = freguesia;
@@ -16,4 +16,6 @@ public class Propriedades {
         this.area = area;
         this.geometry = geometry;
     }
+
+
 }
