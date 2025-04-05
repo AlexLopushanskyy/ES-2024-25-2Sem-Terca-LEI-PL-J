@@ -26,11 +26,11 @@
       <version>3.8.1</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+    <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-csv</artifactId>
-      <version>1.14.0</version>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.10</version>
     </dependency>
 
   </dependencies>
