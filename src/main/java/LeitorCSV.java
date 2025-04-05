@@ -10,8 +10,6 @@ import java.util.List;
 
 public class LeitorCSV {
 
-
-
     public static ArrayList<Propriedade> lerComOpenCSV(String caminhoDoArquivo) {
         ArrayList<Propriedade> propriedades = new ArrayList<>();
 
