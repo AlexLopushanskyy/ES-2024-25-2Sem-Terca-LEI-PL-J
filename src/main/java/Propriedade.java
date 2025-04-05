@@ -1,5 +1,8 @@
 public class Propriedade {
-    private String ID;
+    private int ID;
+    private double PAR_ID;
+    private int PAR_NUM;
+    private double
     private int OWNER;
     private String freguesia;
     private String municipio;
