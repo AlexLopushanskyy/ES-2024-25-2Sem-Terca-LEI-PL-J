@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LeitorCSV {
 
@@ -44,14 +45,57 @@ public class LeitorCSV {
             }
 
             for (Propriedade prop : propriedades) {
-                if(prop.getID()==3)
+                if(prop.getID()==10)
                     System.out.println(prop);
             }
 
         } catch (IOException | CsvException | NumberFormatException e) {
             e.printStackTrace();
         }
+
+        Map<Propriedade, List<Propriedade>> grafo = Grafo.construirGrafo(propriedades);
+        verificarAdjacencias(grafo, 27748);
+        printGrafo(grafo);
+
         return propriedades;
+    }
+
+    public static void printGrafo(Map<Propriedade, List<Propriedade>> grafo) {
+        for (Map.Entry<Propriedade, List<Propriedade>> entry : grafo.entrySet()) {
+            Propriedade chave = entry.getKey();
+            List<Propriedade> adjacentes = entry.getValue();
+
+            System.out.print("ID " + chave.getID() + " -> ");
+            if (adjacentes.isEmpty()) {
+                System.out.println("Nenhuma adjacência");
+            } else {
+                for (Propriedade adjacente : adjacentes) {
+                    System.out.print("ID " + adjacente.getID() + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public static void verificarAdjacencias(Map<Propriedade, List<Propriedade>> grafo, int idPropriedade) {
+        // Procurar a Propriedade com o ID especificado
+        Propriedade propriedadeAlvo = null;
+        for (Propriedade p : grafo.keySet()) {
+            if (p.getID() == idPropriedade) {
+                propriedadeAlvo = p;
+                break;
+            }
+        }
+
+        if (propriedadeAlvo != null) {
+            List<Propriedade> adjacencias = grafo.get(propriedadeAlvo);
+            System.out.println("Propriedade com ID " + idPropriedade + " tem as seguintes adjacências:");
+            for (Propriedade adj : adjacencias) {
+                System.out.println("Propriedade adjacente com ID: " + adj.getID());
+            }
+        } else {
+            System.out.println("Propriedade com ID " + idPropriedade + " não encontrada.");
+        }
     }
 
     public static void main(String[] args) {
