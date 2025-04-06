@@ -10,8 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Leitor csv.
+ */
 public class LeitorCSV {
 
+    /**
+     * Ler com open csv array list.
+     *
+     * @param caminhoDoArquivo the caminho do arquivo
+     * @return the array list
+     */
     public static ArrayList<Propriedade> lerComOpenCSV(String caminhoDoArquivo) {
         ArrayList<Propriedade> propriedades = new ArrayList<>();
 
