@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LeitorCSV {
 
@@ -53,31 +54,31 @@ public class LeitorCSV {
             e.printStackTrace();
         }
 
-        Map<Propriedade, List<Propriedade>> grafo = Grafo.construirGrafo(propriedades);
+        Map<Propriedade, Set<Propriedade>> grafo = Grafo.construirGrafo(propriedades);
         verificarAdjacencias(grafo, 27748);
         printGrafo(grafo);
 
         return propriedades;
     }
 
-    public static void printGrafo(Map<Propriedade, List<Propriedade>> grafo) {
-        for (Map.Entry<Propriedade, List<Propriedade>> entry : grafo.entrySet()) {
+    public static void printGrafo(Map<Propriedade, Set<Propriedade>> grafo) {
+        for (Map.Entry<Propriedade, Set<Propriedade>> entry : grafo.entrySet()) {
             Propriedade chave = entry.getKey();
-            List<Propriedade> adjacentes = entry.getValue();
+            Set<Propriedade> adjacentes = entry.getValue();
 
             System.out.print("ID " + chave.getID() + " -> ");
             if (adjacentes.isEmpty()) {
                 System.out.println("Nenhuma adjacência");
             } else {
                 for (Propriedade adjacente : adjacentes) {
-                    System.out.print("ID " + adjacente.getID() + " ");
+                    System.out.print("ID " + adjacente.getID() + ";");
                 }
                 System.out.println();
             }
         }
     }
 
-    public static void verificarAdjacencias(Map<Propriedade, List<Propriedade>> grafo, int idPropriedade) {
+    public static void verificarAdjacencias(Map<Propriedade, Set<Propriedade>> grafo, int idPropriedade) {
         // Procurar a Propriedade com o ID especificado
         Propriedade propriedadeAlvo = null;
         for (Propriedade p : grafo.keySet()) {
@@ -88,7 +89,7 @@ public class LeitorCSV {
         }
 
         if (propriedadeAlvo != null) {
-            List<Propriedade> adjacencias = grafo.get(propriedadeAlvo);
+            Set<Propriedade> adjacencias = grafo.get(propriedadeAlvo);
             System.out.println("Propriedade com ID " + idPropriedade + " tem as seguintes adjacências:");
             for (Propriedade adj : adjacencias) {
                 System.out.println("Propriedade adjacente com ID: " + adj.getID());

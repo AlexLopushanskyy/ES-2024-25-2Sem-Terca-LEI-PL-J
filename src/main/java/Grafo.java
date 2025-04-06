@@ -2,16 +2,13 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.WKTReader;
 import org.locationtech.jts.index.strtree.STRtree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Grafo {
 
 
-    public static Map<Propriedade, List<Propriedade>> construirGrafo(List<Propriedade> propriedades) {
-        Map<Propriedade, List<Propriedade>> grafo = new HashMap<>();
+    public static Map<Propriedade, Set<Propriedade>> construirGrafo(List<Propriedade> propriedades) {
+        Map<Propriedade, Set<Propriedade>> grafo = new HashMap<>(); // set para retirar duplicados
         STRtree spatialIndex = new STRtree();
         WKTReader reader = new WKTReader();
 
@@ -39,8 +36,8 @@ public class Grafo {
                         // Check if the geometries actually touch
                         if (g1.touches(g2)) {
                             // Add the edge to the graph
-                            grafo.computeIfAbsent(p1, k -> new ArrayList<>()).add(p2);
-                            grafo.computeIfAbsent(p2, k -> new ArrayList<>()).add(p1);
+                            grafo.computeIfAbsent(p1, k -> new HashSet<>()).add(p2);
+                            grafo.computeIfAbsent(p2, k -> new HashSet<>()).add(p1);
                         }
                     }
                 }
