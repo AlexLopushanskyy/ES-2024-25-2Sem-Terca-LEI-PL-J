@@ -12,44 +12,43 @@ public class Grafo {
         construirGrafo(propriedades);
     }
 
-    public void construirGrafo(List<Propriedade> propriedades) {
-        STRtree spatialIndex = new STRtree();
-        WKTReader reader = new WKTReader();
 
-        // First, load all geometries into the spatial index
-        try {
-            List<Geometry> geometries = new ArrayList<>();
+        public void construirGrafo(List<Propriedade> propriedades) {
+            STRtree spatialIndex = new STRtree();  // Spatial index para otimizar a busca de vizinhos
+            WKTReader reader = new WKTReader();    // Leitor WKT para converter geometria
 
-            // Insert each propriedade into the spatial index
-            for (Propriedade p : propriedades) {
-                Geometry geometry = reader.read(p.getGeometry());
-                geometries.add(geometry);
-                spatialIndex.insert(geometry.getEnvelopeInternal(), p); // Insert the property object with its geometry
-            }
+            // Primeiro, carregue todas as geometrias no índice espacial
+            try {
+                // Adiciona todas as propriedades ao grafo como nós, incluindo as isoladas
+                for (Propriedade p : propriedades) {
+                    grafo.putIfAbsent(p, new HashSet<>());
+                    Geometry geometry = reader.read(p.getGeometry());
+                    spatialIndex.insert(geometry.getEnvelopeInternal(), p); // Adiciona o envelope da geometria ao índice espacial
+                }
 
-            // Now, check for neighbors using the spatial index
-            for (Propriedade p1 : propriedades) {
-                Geometry g1 = reader.read(p1.getGeometry());
-                // Query the spatial index for all geometries that might intersect with g1
-                List<Propriedade> potentialNeighbors = spatialIndex.query(g1.getEnvelopeInternal());
+                // Agora, verifica os vizinhos usando o índice espacial
+                for (Propriedade p1 : propriedades) {
+                    Geometry g1 = reader.read(p1.getGeometry());
+                    // Consulta o índice espacial para todas as geometrias que podem interagir com g1
+                    List<Propriedade> potentialNeighbors = spatialIndex.query(g1.getEnvelopeInternal());
 
-                for (Propriedade p2 : potentialNeighbors) {
-                    if (!p1.equals(p2)) {  // Avoid self-comparison
-                        Geometry g2 = reader.read(p2.getGeometry());
+                    for (Propriedade p2 : potentialNeighbors) {
+                        if (!p1.equals(p2)) {  // Evita comparação consigo mesma
+                            Geometry g2 = reader.read(p2.getGeometry());
 
-                        // Check if the geometries actually touch
-                        if (g1.touches(g2)) {
-                            // Add the edge to the graph
-                            grafo.computeIfAbsent(p1, k -> new HashSet<>()).add(p2);
-                            grafo.computeIfAbsent(p2, k -> new HashSet<>()).add(p1);
+                            // Verifica se as geometrias se tocam
+                            if (g1.touches(g2)) {
+                                // Adiciona a aresta ao grafo (se tocar, são vizinhos)
+                                grafo.get(p1).add(p2);
+                                grafo.get(p2).add(p1);
+                            }
                         }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-    }
 
     public Map<Propriedade, Set<Propriedade>> getGrafo() {
         return grafo;
@@ -73,7 +72,7 @@ public class Grafo {
     }
 
 
-    public static void verificarAdjacencias(Map<Propriedade, Set<Propriedade>> grafo, int idPropriedade) {
+    public void verificarAdjacencias(Map<Propriedade, Set<Propriedade>> grafo, int idPropriedade) {
         // Procurar a Propriedade com o ID especificado
         Propriedade propriedadeAlvo = null;
         for (Propriedade p : grafo.keySet()) {

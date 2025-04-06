@@ -7,5 +7,11 @@ public class Main {
         ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV(caminho);
         Grafo g = new Grafo(propriedades);
         g.printGrafo(g.getGrafo());
+        g.verificarAdjacencias(g.getGrafo(),13);
+
+        for (Propriedade prop : propriedades) {
+            if(prop.getID()==10)
+                System.out.println(prop);
+        }
     }
 }
