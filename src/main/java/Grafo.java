@@ -13,42 +13,43 @@ public class Grafo {
     }
 
 
-        public void construirGrafo(List<Propriedade> propriedades) {
-            STRtree spatialIndex = new STRtree();  // Spatial index para otimizar a busca de vizinhos
-            WKTReader reader = new WKTReader();    // Leitor WKT para converter geometria
+    public void construirGrafo(List<Propriedade> propriedades) {
+        STRtree spatialIndex = new STRtree();  // Spatial index para otimizar a busca de vizinhos
+        WKTReader reader = new WKTReader();    // Leitor WKT para converter geometria
 
-            // Primeiro, carregue todas as geometrias no índice espacial
-            try {
-                // Adiciona todas as propriedades ao grafo como nós, incluindo as isoladas
-                for (Propriedade p : propriedades) {
-                    grafo.putIfAbsent(p, new HashSet<>());
-                    Geometry geometry = reader.read(p.getGeometry());
-                    spatialIndex.insert(geometry.getEnvelopeInternal(), p); // Adiciona o envelope da geometria ao índice espacial
-                }
+        // Primeiro, carregue todas as geometrias no índice espacial
+        try {
+            // Adiciona todas as propriedades ao grafo como nós, incluindo as isoladas
+            for (Propriedade p : propriedades) {
+                grafo.putIfAbsent(p, new HashSet<>());
+                Geometry geometry = reader.read(p.getGeometry());
+                spatialIndex.insert(geometry.getEnvelopeInternal(), p); // Adiciona o envelope da geometria ao índice espacial
+            }
 
-                // Agora, verifica os vizinhos usando o índice espacial
-                for (Propriedade p1 : propriedades) {
-                    Geometry g1 = reader.read(p1.getGeometry());
-                    // Consulta o índice espacial para todas as geometrias que podem interagir com g1
-                    List<Propriedade> potentialNeighbors = spatialIndex.query(g1.getEnvelopeInternal());
+            // Agora, verifica os vizinhos usando o índice espacial
+            for (Propriedade p1 : propriedades) {
+                Geometry g1 = reader.read(p1.getGeometry());
+                // Consulta o índice espacial para todas as geometrias que podem interagir com g1
+                List<Propriedade> potentialNeighbors = spatialIndex.query(g1.getEnvelopeInternal());
 
-                    for (Propriedade p2 : potentialNeighbors) {
-                        if (!p1.equals(p2)) {  // Evita comparação consigo mesma
-                            Geometry g2 = reader.read(p2.getGeometry());
+                for (Propriedade p2 : potentialNeighbors) {
+                    if (!p1.equals(p2)) {  // Evita comparação consigo mesma
+                        Geometry g2 = reader.read(p2.getGeometry());
 
-                            // Verifica se as geometrias se tocam
-                            if (g1.touches(g2)) {
-                                // Adiciona a aresta ao grafo (se tocar, são vizinhos)
-                                grafo.get(p1).add(p2);
-                                grafo.get(p2).add(p1);
-                            }
+                        // Verifica se as geometrias se tocam
+                        if (g1.touches(g2)) {
+                            // Adiciona a aresta ao grafo (se tocar, são vizinhos)
+                            grafo.get(p1).add(p2);
+                            grafo.get(p2).add(p1);
                         }
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
 
     public Map<Propriedade, Set<Propriedade>> getGrafo() {
         return grafo;
