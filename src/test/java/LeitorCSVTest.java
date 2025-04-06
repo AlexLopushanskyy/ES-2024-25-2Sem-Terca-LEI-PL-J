@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class LeitorCSVTest extends TestCase {
 
-    private static final String CAMINHO_DO_ARQUIVO = "caminho/para/seu/arquivo.csv";
+    private static final String CAMINHO_DO_ARQUIVO = "src/main/Madeira-Moodle-1.1.csv";
 
 
     public void setUp() throws Exception {
@@ -25,7 +25,7 @@ public class LeitorCSVTest extends TestCase {
 
     //extras gerado pelo copilot
     public void testLerComOpenCSVArquivoVazio() {
-        ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV("caminho/para/arquivo/vazio.csv");
+        ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV("src/main/Madeira-Moodle-1.1.csv");
         assertNotNull(propriedades);
         assertTrue(propriedades.isEmpty());
     }
