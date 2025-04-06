@@ -6,9 +6,13 @@ import java.util.*;
 
 public class Grafo {
 
+    private Map<Propriedade, Set<Propriedade>> grafo = new HashMap<>(); // set para retirar duplicados
 
-    public static Map<Propriedade, Set<Propriedade>> construirGrafo(List<Propriedade> propriedades) {
-        Map<Propriedade, Set<Propriedade>> grafo = new HashMap<>(); // set para retirar duplicados
+    public Grafo(List<Propriedade> propriedades) {
+        construirGrafo(propriedades);
+    }
+
+    public void construirGrafo(List<Propriedade> propriedades) {
         STRtree spatialIndex = new STRtree();
         WKTReader reader = new WKTReader();
 
@@ -45,9 +49,51 @@ public class Grafo {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public Map<Propriedade, Set<Propriedade>> getGrafo() {
         return grafo;
     }
+
+    public void printGrafo(Map<Propriedade, Set<Propriedade>> grafo) {
+        for (Map.Entry<Propriedade, Set<Propriedade>> entry : grafo.entrySet()) {
+            Propriedade chave = entry.getKey();
+            Set<Propriedade> adjacentes = entry.getValue();
+
+            System.out.print("ID " + chave.getID() + " -> ");
+            if (adjacentes.isEmpty()) {
+                System.out.println("Nenhuma adjacência");
+            } else {
+                for (Propriedade adjacente : adjacentes) {
+                    System.out.print("ID " + adjacente.getID() + ";");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+
+    public static void verificarAdjacencias(Map<Propriedade, Set<Propriedade>> grafo, int idPropriedade) {
+        // Procurar a Propriedade com o ID especificado
+        Propriedade propriedadeAlvo = null;
+        for (Propriedade p : grafo.keySet()) {
+            if (p.getID() == idPropriedade) {
+                propriedadeAlvo = p;
+                break;
+            }
+        }
+
+        if (propriedadeAlvo != null) {
+            Set<Propriedade> adjacencias = grafo.get(propriedadeAlvo);
+            System.out.println("Propriedade com ID " + idPropriedade + " tem as seguintes adjacências:");
+            for (Propriedade adj : adjacencias) {
+                System.out.println("Propriedade adjacente com ID: " + adj.getID());
+            }
+        } else {
+            System.out.println("Propriedade com ID " + idPropriedade + " não encontrada.");
+        }
+    }
+
     /*
     private Map<Vertice, List<Vertice>> adjVertices;
 
