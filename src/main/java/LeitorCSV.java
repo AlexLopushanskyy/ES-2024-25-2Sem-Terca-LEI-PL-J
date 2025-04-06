@@ -45,11 +45,6 @@ public class LeitorCSV {
                 propriedades.add(propriedade);
             }
 
-            for (Propriedade prop : propriedades) {
-                if(prop.getID()==10)
-                    System.out.println(prop);
-            }
-
         } catch (IOException | CsvException | NumberFormatException e) {
             e.printStackTrace();
         }
