@@ -4,11 +4,23 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Grafo test.
+ */
 public class GrafoTest extends TestCase {
 
+    /**
+     * The Propriedades.
+     */
     private ArrayList<Propriedade> propriedades;
+    /**
+     * The Grafo.
+     */
     private Grafo grafo;
 
+    /**
+     * The constant CAMINHO_DO_ARQUIVO.
+     */
     public void setUp() throws Exception {
         super.setUp();
         super.setUp();
@@ -19,29 +31,46 @@ public class GrafoTest extends TestCase {
         grafo = new Grafo(propriedades);
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     public void tearDown() throws Exception {
         super.tearDown();
         propriedades = null;
         grafo = null;
     }
 
+    /**
+     * Test construir grafo.
+     */
     public void testConstruirGrafo() {
         Map<Propriedade, Set<Propriedade>> grafoMap = grafo.getGrafo();
         assertNotNull(grafoMap);
         assertEquals(3, grafoMap.size());
     }
 
+    /**
+     * Test get grafo.
+     */
     public void testGetGrafo() {
         Map<Propriedade, Set<Propriedade>> grafoMap = grafo.getGrafo();
         assertNotNull(grafoMap);
         assertEquals(3, grafoMap.size());
     }
 
+    /**
+     * Test print grafo.
+     */
     public void testPrintGrafo() {
         grafo.printGrafo(grafo.getGrafo());
         // Verifique a saída manualmente ou redirecione a saída do console para um stream e verifique
     }
 
+    /**
+     * Test verificar adjacencias.
+     */
     public void testVerificarAdjacencias() {
         grafo.verificarAdjacencias(grafo.getGrafo(), 1);
         // Verifique a saída manualmente ou redirecione a saída do console para um stream e verifique

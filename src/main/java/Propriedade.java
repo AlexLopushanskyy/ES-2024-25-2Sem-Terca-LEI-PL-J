@@ -1,5 +1,8 @@
-
+/**
+ * Propriedade class represents a property with various attributes.
+ */
 public class Propriedade {
+
     private int ID;
     private double PAR_ID;
     private String PAR_NUM;
@@ -60,45 +63,82 @@ public class Propriedade {
     }
 
     /**
-     * Getters for the properties of the Propriedade class.
+     * getID method returns the ID of the property.
+     * @return  int ID
      */
 
     public int getID() {
         return ID;
     }
 
+    /**
+     * getPAR_ID method returns the PAR_ID of the property.
+     * @return  double PAR_ID
+     */
     public double getPAR_ID() {
         return PAR_ID;
     }
 
+    /**
+     * getPAR_NUM method returns the PAR_NUM of the property.
+     * @return  String PAR_NUM
+     */
     public String getPAR_NUM() {
         return PAR_NUM;
     }
 
+    /**
+     * getShape_length method returns the shape length of the property.
+     * @return  double shape_length
+     */
     public double getShape_length() {
         return shape_length;
     }
 
+    /**
+     * getShape_area method returns the shape area of the property.
+     * @return  double shape_area
+     */
     public double getShape_area() {
         return shape_area;
     }
 
+    /**
+     * getGeometry method returns the geometry of the property.
+     * @return  String geometry
+     */
     public String getGeometry() {
         return geometry;
     }
 
+    /**
+     * getOWNER method returns the owner ID of the property.
+     * @return  int OWNER
+     */
     public int getOWNER() {
         return OWNER;
     }
 
+    /**
+     * getFreguesia method returns the freguesia of the property.
+     * @return  String freguesia
+     */
     public String getFreguesia() {
         return freguesia;
     }
 
+    /**
+     * getMunicipio method returns the municipality of the property.
+     * @return  String municipio
+     */
     public String getMunicipio() {
         return municipio;
     }
 
+    /**
+     * getIlha method returns the island where the property is located.
+     * @return  String ilha
+     */
     public String getIlha() {
         return ilha;
     }

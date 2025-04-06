@@ -7,13 +7,25 @@ import java.util.ArrayList;
  */
 public class LeitorCSVTest extends TestCase {
 
+    /**
+     * The constant CAMINHO_DO_ARQUIVO.
+     */
     private static final String CAMINHO_DO_ARQUIVO = "src/main/Madeira-Moodle-1.1.csv";
 
-
+    /**
+     * Set up.
+     *
+     * @throws Exception the exception
+     */
     public void setUp() throws Exception {
         super.setUp();
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
 
     public void tearDown() throws Exception {
         super.tearDown();
