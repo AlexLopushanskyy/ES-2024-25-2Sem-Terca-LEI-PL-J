@@ -14,7 +14,7 @@ public class Main {
         String caminho = "src/main/Madeira-Moodle-1.1.csv";
         ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV(caminho);
         GrafoPropriedades g = new GrafoPropriedades(propriedades);
-        //g.printGrafo(g.getGrafo());
+        g.printGrafo(g.getGrafo());
         //g.verificarAdjacencias(g.getGrafo(),13);
 
         GrafoProprietarios grafoProprietarios = new GrafoProprietarios(g.getGrafo());
