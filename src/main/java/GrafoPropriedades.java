@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * The type Grafo.
  */
-public class Grafo {
+public class GrafoPropriedades {
 
     private Map<Propriedade, Set<Propriedade>> grafo = new HashMap<>(); // set para retirar duplicados
 
@@ -16,7 +16,7 @@ public class Grafo {
      *
      * @param propriedades the propriedades
      */
-    public Grafo(List<Propriedade> propriedades) {
+    public GrafoPropriedades(List<Propriedade> propriedades) {
         construirGrafo(propriedades);
     }
 
@@ -65,6 +65,7 @@ public class Grafo {
             e.printStackTrace();
         }
     }
+
 
 
     /**
