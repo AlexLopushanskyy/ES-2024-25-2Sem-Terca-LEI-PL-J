@@ -16,7 +16,7 @@ public class GrafoTest extends TestCase {
     /**
      * The Grafo.
      */
-    private Grafo grafo;
+    private GrafoPropriedades grafo;
 
     /**
      * The constant CAMINHO_DO_ARQUIVO.
@@ -28,7 +28,7 @@ public class GrafoTest extends TestCase {
         propriedades.add(new Propriedade(1, 1, "1", 10.0, 20.0, "POINT (1 1)", 1, "Freguesia1", "Municipio1", "Ilha1"));
         propriedades.add(new Propriedade(2, 2, "2", 15.0, 25.0, "POINT (2 2)", 2, "Freguesia2", "Municipio2", "Ilha2"));
         propriedades.add(new Propriedade(3, 3, "3", 20.0, 30.0, "POINT (3 3)", 3, "Freguesia3", "Municipio3", "Ilha3"));
-        grafo = new Grafo(propriedades);
+        grafo = new GrafoPropriedades(propriedades);
     }
 
     /**
