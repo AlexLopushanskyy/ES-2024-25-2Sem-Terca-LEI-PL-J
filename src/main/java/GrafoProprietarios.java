@@ -43,4 +43,8 @@ public class GrafoProprietarios {
         return grafo;
     }
 
+    public Set<Integer> getVizinhos(int ownerId) {
+        return grafo.getOrDefault(ownerId, new HashSet<>());
+    }
+
 }
