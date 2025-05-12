@@ -15,13 +15,12 @@ public class Main {
         ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV(caminho);
         GrafoPropriedades g = new GrafoPropriedades(propriedades);
         g.printGrafo(g.getGrafo());
-        //g.verificarAdjacencias(g.getGrafo(),13);
+        g.verificarAdjacencias(g.getGrafo(),24700);
 
         GrafoProprietarios grafoProprietarios = new GrafoProprietarios(g.getGrafo());
         grafoProprietarios.printGrafo();
 
-
-        System.out.println("Vizinhos do proprietário 1001: " + grafoProprietarios.getVizinhos(1000));
+        System.out.println("Vizinhos do proprietário 1000: " + grafoProprietarios.getVizinhos(1000));
 
         //for (Propriedade prop : propriedades) {
             //if(prop.getID()==10)

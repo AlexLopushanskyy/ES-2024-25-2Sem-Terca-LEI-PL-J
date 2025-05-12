@@ -83,6 +83,7 @@ public class GrafoPropriedades {
      * @param grafo the grafo
      */
     public void printGrafo(Map<Propriedade, Set<Propriedade>> grafo) {
+
         for (Map.Entry<Propriedade, Set<Propriedade>> entry : grafo.entrySet()) {
             Propriedade chave = entry.getKey();
             Set<Propriedade> adjacentes = entry.getValue();
