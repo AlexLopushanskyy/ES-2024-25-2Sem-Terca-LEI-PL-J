@@ -22,6 +22,11 @@ public class Main {
 
         System.out.println("Vizinhos do proprietário 1000: " + grafoProprietarios.getVizinhos(1000));
 
+        CalculosPropriedades calculos = new CalculosPropriedades(propriedades);
+        double areaMediaFreguesia = calculos.calcularAreaMedia("freguesia", "São Martinho");
+        System.out.println("Área média da freguesia de São Martinho: " + areaMediaFreguesia + "m²");
+
+
         //for (Propriedade prop : propriedades) {
             //if(prop.getID()==10)
               //  System.out.println(prop);

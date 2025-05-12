@@ -20,14 +20,14 @@ public class CalculosPropriedades {
                 case "freguesia":
                     corresponde = p.getFreguesia().equalsIgnoreCase(nome);
                     break;
-                case "concelho":
+                case "municipo":
                     corresponde = p.getMunicipio().equalsIgnoreCase(nome);
                     break;
-                case "distrito":
+                case "ilha":
                     corresponde = p.getIlha().equalsIgnoreCase(nome);
                     break;
                 default:
-                    System.out.println("Tipo inválido. Use: freguesia, concelho ou distrito.");
+                    System.out.println("Tipo inválido. Use: freguesia, municipio ou ilha.");
                     return -1;
             }
 
