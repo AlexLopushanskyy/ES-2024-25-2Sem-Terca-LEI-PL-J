@@ -54,7 +54,7 @@ public class Main {
         trocas.forEach(System.out::println);
         sugestor.aplicarTrocas(trocas);
 
-        double media2 = calculos.calcularAreaMediaAgrupada("ilha", "ilha da madeira (madeira)", sugestor.getGrafoPropriedades());
+        double media2 = calculos.calcularAreaMediaAgrupada("ilha", "ilha da madeira (madeira)", sugestor.getGrafoPropriedades()); //as trocas foram feitas no grafo usado nesse objeto, entao nao podemos ir fazer os calculos no grafoAdj criado no inicio.
         System.out.println("Área média da ilha da madeira (propriedades adjacentes): " + media2 + "m²");
     }
 }
