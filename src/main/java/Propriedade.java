@@ -142,4 +142,8 @@ public class Propriedade {
     public String getIlha() {
         return ilha;
     }
+
+    public void setOWNER(int originalOwnerP2) {
+        this.OWNER = originalOwnerP2;
+    }
 }

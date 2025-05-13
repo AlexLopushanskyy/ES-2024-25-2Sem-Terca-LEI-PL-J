@@ -54,6 +54,7 @@ public class CalculosPropriedades {
                 case "freguesia" -> p.getFreguesia().equalsIgnoreCase(nome);
                 case "municipio" -> p.getMunicipio().equalsIgnoreCase(nome);
                 case "ilha" -> p.getIlha().equalsIgnoreCase(nome);
+                case "todas" -> true;
                 default -> false;
             };
 

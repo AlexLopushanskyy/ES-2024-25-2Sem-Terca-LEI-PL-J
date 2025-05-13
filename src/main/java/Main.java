@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type Main.
@@ -24,10 +25,12 @@ public class Main {
 
         CalculosPropriedades calculos = new CalculosPropriedades(propriedades);
         double areaMedia = calculos.calcularAreaMedia("freguesia", "calheta");
-        System.out.println("Área média de propriedades da freguesia de Calheta: " + areaMedia + "m²");
+        System.out.println("Área média da freguesia de Calheta: " + areaMedia + "m²");
 
         double media = calculos.calcularAreaMediaAgrupada("freguesia", "calheta", grafo.getGrafo());
-        System.out.println("Área média de propriedades da freguesia de Calheta (propriedades adjacentes): " + media + "m²");
+        System.out.println("Área média da freguesia de Calheta (propriedades adjacentes): " + media + "m²");
+
+
 
 
         //for (Propriedade prop : propriedades) {
