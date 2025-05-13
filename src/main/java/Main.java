@@ -33,6 +33,26 @@ public class Main {
 
 
 
+        // 5. Gerar sugestões de troca (ponto 6 e 7), com otimização via grafo de proprietários
+        CalculadoraTrocas trocas = new CalculadoraTrocas(
+                propriedades,
+                grafo.getGrafo(),
+                grafoProprietarios.getGrafo()
+        );
+
+        List<SugestaoTroca> sugestoes = trocas.gerarSugestoesTroca("freguesia", "calheta");
+
+        // 6. Mostrar sugestões (ordenadas por melhoria da média)
+        System.out.println("\n--- Sugestões de Troca (zona: Calheta) ---");
+        if (sugestoes.isEmpty()) {
+            System.out.println("Nenhuma sugestão encontrada.");
+        } else {
+            for (SugestaoTroca s : sugestoes) {
+                System.out.println(s);
+            }
+        }
+
+
         //for (Propriedade prop : propriedades) {
             //if(prop.getID()==10)
               //  System.out.println(prop);
