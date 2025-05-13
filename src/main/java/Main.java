@@ -13,18 +13,21 @@ public class Main {
     public static void main(String[] args) {
         String caminho = "src/main/Madeira-Moodle-1.1.csv";
         ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV(caminho);
-        GrafoPropriedades g = new GrafoPropriedades(propriedades);
-        g.printGrafo(g.getGrafo());
-        g.verificarAdjacencias(g.getGrafo(),24700);
+        GrafoPropriedades grafo = new GrafoPropriedades(propriedades);
+        grafo.printGrafo(grafo.getGrafo());
+        //g.verificarAdjacencias(g.getGrafo(),24700);
 
-        GrafoProprietarios grafoProprietarios = new GrafoProprietarios(g.getGrafo());
+        GrafoProprietarios grafoProprietarios = new GrafoProprietarios(grafo.getGrafo());
         grafoProprietarios.printGrafo();
 
         System.out.println("Vizinhos do proprietário 1000: " + grafoProprietarios.getVizinhos(1000));
 
         CalculosPropriedades calculos = new CalculosPropriedades(propriedades);
-        double areaMediaFreguesia = calculos.calcularAreaMedia("freguesia", "calheta");
-        System.out.println("Área média da freguesia de São Martinho: " + areaMediaFreguesia + "m²");
+        double areaMedia = calculos.calcularAreaMedia("freguesia", "calheta");
+        System.out.println("Área média da freguesia de Calheta: " + areaMedia + "m²");
+
+        double media = calculos.calcularAreaMediaAgrupada("freguesia", "calheta", grafo.getGrafo());
+        System.out.println("Área média da freguesia de Calheta (propriedades adjacentes): " + media + "m²");
 
 
         //for (Propriedade prop : propriedades) {
