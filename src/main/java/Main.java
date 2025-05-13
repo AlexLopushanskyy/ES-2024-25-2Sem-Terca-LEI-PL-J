@@ -52,6 +52,9 @@ public class Main {
         SugestorDeTrocas sugestor = new SugestorDeTrocas(grafoAdj.getGrafo());
         List<SugestorDeTrocas.TrocaSugerida> trocas = sugestor.sugerirTrocas();
         trocas.forEach(System.out::println);
-        
+        sugestor.aplicarTrocas(trocas);
+
+        double media2 = calculos.calcularAreaMediaAgrupada("ilha", "ilha da madeira (madeira)", sugestor.getGrafoPropriedades());
+        System.out.println("Área média da ilha da madeira (propriedades adjacentes): " + media2 + "m²");
     }
 }

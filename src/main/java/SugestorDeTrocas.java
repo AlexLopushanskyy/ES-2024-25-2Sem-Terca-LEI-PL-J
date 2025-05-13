@@ -40,7 +40,48 @@ public class SugestorDeTrocas {
         return trocas;
     }
 
+    // Método para aplicar todas as trocas sugeridas
+    public void aplicarTrocas(List<TrocaSugerida> trocas) {
+        for (TrocaSugerida troca : trocas) {
+            Propriedade p1 = troca.getP1();
+            Propriedade p2 = troca.getP2();
 
+            // Troca os donos das propriedades
+            int dono1Antigo = p1.getOWNER();
+            int dono2Antigo = p2.getOWNER();
+
+            p1.setOWNER(dono2Antigo); // A propriedade p1 recebe o dono de p2
+            p2.setOWNER(dono1Antigo); // A propriedade p2 recebe o dono de p1
+
+            // Atualizar o grafo de propriedades (se necessário)
+            atualizarGrafo(p1, p2); // Atualiza as vizinhanças após a troca
+        }
+    }
+
+    // Método para atualizar o grafo de propriedades
+    private void atualizarGrafo(Propriedade p1, Propriedade p2) {
+        // Como a troca de propriedades afeta o dono, precisamos atualizar as relações de vizinhança
+        for (Map.Entry<Propriedade, Set<Propriedade>> entry : grafoPropriedades.entrySet()) {
+            Propriedade origem = entry.getKey();
+            Set<Propriedade> vizinhos = entry.getValue();
+
+            // Remover a vizinhança antiga
+            vizinhos.remove(p1);
+            vizinhos.remove(p2);
+
+            // Adicionar a nova vizinhança
+            if (p1.getOWNER() == origem.getOWNER()) {
+                vizinhos.add(p1);
+            }
+            if (p2.getOWNER() == origem.getOWNER()) {
+                vizinhos.add(p2);
+            }
+        }
+    }
+
+    public Map<Propriedade, Set<Propriedade>> getGrafoPropriedades() {
+        return grafoPropriedades;
+    }
 
     public class TrocaSugerida {
         private Propriedade p1;
