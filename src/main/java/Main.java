@@ -14,27 +14,25 @@ public class Main {
     public static void main(String[] args) {
         String caminho = "src/main/Madeira-Moodle-1.1.csv";
         ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV(caminho);
-        GrafoPropriedades grafo = new GrafoPropriedades(propriedades);
-        grafo.printGrafo(grafo.getGrafo());
+        GrafoPropriedades grafoAdj = new GrafoPropriedades(propriedades);
+        grafoAdj.printGrafo(grafoAdj.getGrafo());
         //g.verificarAdjacencias(g.getGrafo(),24700);
 
-        GrafoProprietarios grafoProprietarios = new GrafoProprietarios(grafo.getGrafo());
+        GrafoProprietarios grafoProprietarios = new GrafoProprietarios(grafoAdj.getGrafo());
         grafoProprietarios.printGrafo();
 
         System.out.println("Vizinhos do proprietário 1000: " + grafoProprietarios.getVizinhos(1000));
 
         CalculosPropriedades calculos = new CalculosPropriedades(propriedades);
-        double areaMedia = calculos.calcularAreaMedia("freguesia", "calheta");
-        System.out.println("Área média da freguesia de Calheta: " + areaMedia + "m²");
+        double areaMedia = calculos.calcularAreaMedia("ilha", "ilha da madeira (madeira)");
+        System.out.println("Área média da da ilha da madeira: " + areaMedia + "m²");
 
-        double media = calculos.calcularAreaMediaAgrupada("freguesia", "calheta", grafo.getGrafo());
-        System.out.println("Área média da freguesia de Calheta (propriedades adjacentes): " + media + "m²");
-
-
+        double media = calculos.calcularAreaMediaAgrupada("ilha", "ilha da madeira (madeira)", grafoAdj.getGrafo());
+        System.out.println("Área média da ilha da madeira (propriedades adjacentes): " + media + "m²");
 
 
         // 5. Gerar sugestões de troca (ponto 6 e 7), com otimização via grafo de proprietários
-        CalculadoraTrocas trocas = new CalculadoraTrocas(
+        /*CalculadoraTrocas trocas = new CalculadoraTrocas(
                 propriedades,
                 grafo.getGrafo(),
                 grafoProprietarios.getGrafo()
@@ -50,12 +48,10 @@ public class Main {
             for (SugestaoTroca s : sugestoes) {
                 System.out.println(s);
             }
-        }
-
-
-        //for (Propriedade prop : propriedades) {
-            //if(prop.getID()==10)
-              //  System.out.println(prop);
-        //}
+        }*/
+        SugestorDeTrocas sugestor = new SugestorDeTrocas(grafoAdj.getGrafo());
+        List<SugestorDeTrocas.TrocaSugerida> trocas = sugestor.sugerirTrocas();
+        trocas.forEach(System.out::println);
+        
     }
 }
