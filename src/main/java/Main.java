@@ -50,7 +50,7 @@ public class Main {
             }
         }*/
         SugestorDeTrocas sugestor = new SugestorDeTrocas(grafoAdj.getGrafo());
-        List<SugestorDeTrocas.TrocaSugerida> trocas = sugestor.sugerirTrocas();
+        List<SugestorDeTrocas.TrocaSugerida> trocas = sugestor.sugerirTrocas("ilha", "ilha da madeira (madeira)");
         trocas.forEach(System.out::println);
         sugestor.aplicarTrocas(trocas);
 

@@ -3,13 +3,13 @@ import java.util.*;
 public class SugestorDeTrocas {
 
     private Map<Propriedade, Set<Propriedade>> grafoPropriedades;
-    private double limitePercentualArea = 0.10; // 10%
+    private int limitePercentualTroca = 80; // 10%
 
     public SugestorDeTrocas(Map<Propriedade, Set<Propriedade>> grafoPropriedades) {
         this.grafoPropriedades = grafoPropriedades;
     }
 
-    public List<TrocaSugerida> sugerirTrocas() {
+    public List<TrocaSugerida> sugerirTrocas(String tipoZona, String nomeZona) {
         List<TrocaSugerida> trocas = new ArrayList<>();
 
         Set<String> trocasJaSugeridas = new HashSet<>();
@@ -19,24 +19,46 @@ public class SugestorDeTrocas {
 
             for (Propriedade p2 : entry.getValue()) {
                 if (p1.getOWNER() != p2.getOWNER()) {
-                    double area1 = p1.getShape_area();
-                    double area2 = p2.getShape_area();
 
-                    double diferenca = Math.abs(area1 - area2) / Math.max(area1, area2);
+                    // Verificar se estão na mesma zona geográfica
+                    boolean mesmaZona = switch (tipoZona.toLowerCase()) {
+                        case "freguesia" -> p1.getFreguesia().equalsIgnoreCase(nomeZona)
+                                && p2.getFreguesia().equalsIgnoreCase(nomeZona);
+                        case "municipio" -> p1.getMunicipio().equalsIgnoreCase(nomeZona)
+                                && p2.getMunicipio().equalsIgnoreCase(nomeZona);
+                        case "ilha" -> p1.getIlha().equalsIgnoreCase(nomeZona)
+                                && p2.getIlha().equalsIgnoreCase(nomeZona);
+                        default -> false;
+                    };
 
-                    if (diferenca <= limitePercentualArea) {
+                    if (!mesmaZona) {
+                        continue; // Pular se não estiverem na mesma zona
+                    }
+
+                    // Calcular diferenças normalizadas
+                    double areaDiff = Math.abs(p1.getShape_area() - p2.getShape_area()) /
+                            Math.max(p1.getShape_area(), p2.getShape_area());
+
+                    double lengthDiff = Math.abs(p1.getShape_length() - p2.getShape_length()) /
+                            Math.max(p1.getShape_length(), p2.getShape_length());
+
+                    double peso = 0.6 * areaDiff + 0.4 * lengthDiff;
+
+                    int potencial = (int) ((1 - peso) * 100);
+                    potencial = Math.max(0, Math.min(100, potencial));
+
+                    if (potencial >= limitePercentualTroca) {
                         // Garante que troca não seja duplicada (A<->B e B<->A)
                         String idTroca = Math.min(p1.getID(), p2.getID()) + "-" + Math.max(p1.getID(), p2.getID());
 
                         if (!trocasJaSugeridas.contains(idTroca)) {
-                            trocas.add(new TrocaSugerida(p1, p2));
+                            trocas.add(new TrocaSugerida(p1, p2, potencial));
                             trocasJaSugeridas.add(idTroca);
                         }
                     }
                 }
             }
         }
-
         return trocas;
     }
 
@@ -83,24 +105,29 @@ public class SugestorDeTrocas {
         return grafoPropriedades;
     }
 
-    public class TrocaSugerida {
+    public static class TrocaSugerida {
         private Propriedade p1;
         private Propriedade p2;
+        private int potencial;
 
-        public TrocaSugerida(Propriedade p1, Propriedade p2) {
+        public TrocaSugerida(Propriedade p1, Propriedade p2, int potencial) {
             this.p1 = p1;
             this.p2 = p2;
+            this.potencial = potencial;
         }
 
         public Propriedade getP1() { return p1; }
         public Propriedade getP2() { return p2; }
+        public int getPotencial() { return potencial; }
+
 
         @Override
         public String toString() {
-            return "Sugerir troca entre Propriedade ID " + p1.getID() +
-                    " (dono: " + p1.getOWNER() + ", área: " + p1.getShape_area() + ") e " +
-                    "Propriedade ID " + p2.getID() +
-                    " (dono: " + p2.getOWNER() + ", área: " + p2.getShape_area() + ")";
+            return "Troca sugerida: Propriedade " + p1.getID() + " (dono: " + p1.getOWNER() +
+                    ", área: " + String.format("%.2f", p1.getShape_area()) + " m²)" +
+                    " <-> Propriedade " + p2.getID() + " (dono: " + p2.getOWNER() +
+                    ", área: " + String.format("%.2f", p2.getShape_area()) + " m²)" +
+                    " | Potencial: " + potencial + "%";
         }
     }
 }
