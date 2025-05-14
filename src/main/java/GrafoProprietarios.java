@@ -3,10 +3,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Grafo proprietarios.
+ */
 public class GrafoProprietarios {
 
     private Map<Integer, Set<Integer>> grafo = new HashMap<>(); // OwnerID -> Set de OwnerIDs vizinhos
 
+    /**
+     * Instantiates a new Grafo proprietarios.
+     *
+     * @param grafoPropriedades the grafo propriedades
+     */
     public GrafoProprietarios(Map<Propriedade, Set<Propriedade>> grafoPropriedades) {
         construirGrafo(grafoPropriedades);
     }
@@ -29,6 +37,9 @@ public class GrafoProprietarios {
         }
     }
 
+    /**
+     * Print grafo.
+     */
     public void printGrafo() {
         for (Map.Entry<Integer, Set<Integer>> entry : grafo.entrySet()) {
             System.out.print("Proprietário " + entry.getKey() + " -> ");
@@ -39,10 +50,21 @@ public class GrafoProprietarios {
         }
     }
 
+    /**
+     * Gets grafo.
+     *
+     * @return the grafo
+     */
     public Map<Integer, Set<Integer>> getGrafo() {
         return grafo;
     }
 
+    /**
+     * Gets vizinhos.
+     *
+     * @param ownerId the owner id
+     * @return the vizinhos
+     */
     public Set<Integer> getVizinhos(int ownerId) {
         return grafo.getOrDefault(ownerId, new HashSet<>());
     }

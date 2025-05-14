@@ -1,14 +1,29 @@
 import java.util.*;
 
+/**
+ * The type Sugestor de trocas.
+ */
 public class SugestorDeTrocas {
 
     private Map<Propriedade, Set<Propriedade>> grafoPropriedades;
     private int limitePercentualTroca = 80; // 10%
 
+    /**
+     * Instantiates a new Sugestor de trocas.
+     *
+     * @param grafoPropriedades the grafo propriedades
+     */
     public SugestorDeTrocas(Map<Propriedade, Set<Propriedade>> grafoPropriedades) {
         this.grafoPropriedades = grafoPropriedades;
     }
 
+    /**
+     * Sugerir trocas list.
+     *
+     * @param tipoZona the tipo zona
+     * @param nomeZona the nome zona
+     * @return the list
+     */
     public List<TrocaSugerida> sugerirTrocas(String tipoZona, String nomeZona) {
         List<TrocaSugerida> trocas = new ArrayList<>();
 
@@ -62,7 +77,12 @@ public class SugestorDeTrocas {
         return trocas;
     }
 
-    // Método para aplicar todas as trocas sugeridas
+    /**
+     * Aplicar trocas.
+     *
+     * @param trocas the trocas
+     */
+// Método para aplicar todas as trocas sugeridas
     public void aplicarTrocas(List<TrocaSugerida> trocas) {
         for (TrocaSugerida troca : trocas) {
             Propriedade p1 = troca.getP1();
@@ -101,23 +121,55 @@ public class SugestorDeTrocas {
         }
     }
 
+    /**
+     * Gets grafo propriedades.
+     *
+     * @return the grafo propriedades
+     */
     public Map<Propriedade, Set<Propriedade>> getGrafoPropriedades() {
         return grafoPropriedades;
     }
 
+    /**
+     * The type Troca sugerida.
+     */
     public static class TrocaSugerida {
         private Propriedade p1;
         private Propriedade p2;
         private int potencial;
 
+        /**
+         * Instantiates a new Troca sugerida.
+         *
+         * @param p1        the p 1
+         * @param p2        the p 2
+         * @param potencial the potencial
+         */
         public TrocaSugerida(Propriedade p1, Propriedade p2, int potencial) {
             this.p1 = p1;
             this.p2 = p2;
             this.potencial = potencial;
         }
 
+        /**
+         * Gets p 1.
+         *
+         * @return the p 1
+         */
         public Propriedade getP1() { return p1; }
+
+        /**
+         * Gets p 2.
+         *
+         * @return the p 2
+         */
         public Propriedade getP2() { return p2; }
+
+        /**
+         * Gets potencial.
+         *
+         * @return the potencial
+         */
         public int getPotencial() { return potencial; }
 
 

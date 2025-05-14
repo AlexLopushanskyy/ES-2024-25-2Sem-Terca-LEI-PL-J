@@ -1,14 +1,29 @@
 import java.util.*;
 
 
+/**
+ * The type Calculos propriedades.
+ */
 public class CalculosPropriedades {
 
     private List<Propriedade> propriedades;
 
+    /**
+     * Instantiates a new Calculos propriedades.
+     *
+     * @param propriedades the propriedades
+     */
     public CalculosPropriedades(List<Propriedade> propriedades) {
         this.propriedades = propriedades;
     }
 
+    /**
+     * Calcular area media double.
+     *
+     * @param tipo the tipo
+     * @param nome the nome
+     * @return the double
+     */
     public double calcularAreaMedia(String tipo, String nome) {
         double soma = 0;
         int contador = 0;
@@ -45,6 +60,14 @@ public class CalculosPropriedades {
         return soma / contador;
     }
 
+    /**
+     * Calcular area media agrupada double.
+     *
+     * @param tipo  the tipo
+     * @param nome  the nome
+     * @param grafo the grafo
+     * @return the double
+     */
     public double calcularAreaMediaAgrupada(String tipo, String nome, Map<Propriedade, Set<Propriedade>> grafo) {
         Set<Propriedade> visitadas = new HashSet<>();
         List<Double> areasAgrupadas = new ArrayList<>();
