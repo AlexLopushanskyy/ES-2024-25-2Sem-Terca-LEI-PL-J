@@ -107,4 +107,14 @@ public class PropriedadeTest extends TestCase {
     public void testGetIlha() {
         assertEquals("Ilha1", propriedade.getIlha());
     }
+
+    /**
+     * Test set owner.
+     */
+    public void testSetOWNER() {
+        propriedade.setOWNER(20);
+        assertEquals(20, propriedade.getOWNER());
+    }
+
+
 }
