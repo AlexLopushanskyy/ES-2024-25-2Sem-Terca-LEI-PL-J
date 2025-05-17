@@ -6,7 +6,7 @@ import java.util.*;
 public class SugestorDeTrocas {
 
     private Map<Propriedade, Set<Propriedade>> grafoPropriedades;
-    private int limitePercentualTroca = 80; // 10%
+    private int limitePercentualTroca = 80;
 
     /**
      * Instantiates a new Sugestor de trocas.

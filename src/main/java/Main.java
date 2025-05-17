@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,6 @@ public class Main {
         ArrayList<Propriedade> propriedades = LeitorCSV.lerComOpenCSV(caminho);
         GrafoPropriedades grafoAdj = new GrafoPropriedades(propriedades);
         grafoAdj.printGrafo(grafoAdj.getGrafo());
-        //g.verificarAdjacencias(g.getGrafo(),24700);
 
         GrafoProprietarios grafoProprietarios = new GrafoProprietarios(grafoAdj.getGrafo());
         grafoProprietarios.printGrafo();
@@ -25,36 +25,20 @@ public class Main {
 
         CalculosPropriedades calculos = new CalculosPropriedades(propriedades);
         double areaMedia = calculos.calcularAreaMedia("ilha", "ilha da madeira (madeira)");
-        System.out.println("Área média da da ilha da madeira: " + areaMedia + "m²");
+        System.out.println("Área média de propriedades da ilha da madeira: " + areaMedia + "m²");
 
         double media = calculos.calcularAreaMediaAgrupada("ilha", "ilha da madeira (madeira)", grafoAdj.getGrafo());
-        System.out.println("Área média da ilha da madeira (propriedades adjacentes): " + media + "m²");
+        System.out.println("Área média de propriedades da ilha da madeira (propriedades adjacentes): " + media + "m²");
 
 
-        // 5. Gerar sugestões de troca (ponto 6 e 7), com otimização via grafo de proprietários
-        /*CalculadoraTrocas trocas = new CalculadoraTrocas(
-                propriedades,
-                grafo.getGrafo(),
-                grafoProprietarios.getGrafo()
-        );
-
-        List<SugestaoTroca> sugestoes = trocas.gerarSugestoesTroca("freguesia", "calheta");
-
-        // 6. Mostrar sugestões (ordenadas por melhoria da média)
-        System.out.println("\n--- Sugestões de Troca (zona: Calheta) ---");
-        if (sugestoes.isEmpty()) {
-            System.out.println("Nenhuma sugestão encontrada.");
-        } else {
-            for (SugestaoTroca s : sugestoes) {
-                System.out.println(s);
-            }
-        }*/
         SugestorDeTrocas sugestor = new SugestorDeTrocas(grafoAdj.getGrafo());
         List<SugestorDeTrocas.TrocaSugerida> trocas = sugestor.sugerirTrocas("ilha", "ilha da madeira (madeira)");
         trocas.forEach(System.out::println);
         sugestor.aplicarTrocas(trocas);
+        System.out.println();
+        System.out.println("TROCAS APLICADAS");
 
         double media2 = calculos.calcularAreaMediaAgrupada("ilha", "ilha da madeira (madeira)", sugestor.getGrafoPropriedades()); //as trocas foram feitas no grafo usado nesse objeto, entao nao podemos ir fazer os calculos no grafoAdj criado no inicio.
-        System.out.println("Área média da ilha da madeira (propriedades adjacentes): " + media2 + "m²");
+        System.out.println("Área média de propriedades da ilha da madeira (propriedades adjacentes): " + media2 + "m²");
     }
 }
