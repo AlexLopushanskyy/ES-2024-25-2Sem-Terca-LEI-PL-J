@@ -20,16 +20,16 @@ public class Propriedade {
      * Constructor for the Propriedade class.
      * Initializes the properties of the Propriedade object.
      *
-     * @param ID          The ID of the property.
-     * @param PAR_ID      The PAR_ID of the property.
-     * @param PAR_NUM     The PAR_NUM of the property.
+     * @param ID           The ID of the property.
+     * @param PAR_ID       The PAR_ID of the property.
+     * @param PAR_NUM      The PAR_NUM of the property.
      * @param shape_length The length of the shape.
      * @param shape_area   The area of the shape.
-     * @param geometry    The geometry data of the property.
-     * @param OWNER       The owner ID of the property.
-     * @param freguesia   The freguesia (parish) of the property.
-     * @param municipio   The municipality of the property.
-     * @param ilha        The island where the property is located.
+     * @param geometry     The geometry data of the property.
+     * @param OWNER        The owner ID of the property.
+     * @param freguesia    The freguesia (parish) of the property.
+     * @param municipio    The municipality of the property.
+     * @param ilha         The island where the property is located.
      */
     public Propriedade(int ID, double PAR_ID, String PAR_NUM, double shape_length, double shape_area, String geometry, int OWNER, String freguesia, String municipio, String ilha) {
         this.ID = ID;
@@ -66,7 +66,8 @@ public class Propriedade {
 
     /**
      * getID method returns the ID of the property.
-     * @return  int ID
+     *
+     * @return int ID
      */
 
     public int getID() {
@@ -75,7 +76,8 @@ public class Propriedade {
 
     /**
      * getPAR_ID method returns the PAR_ID of the property.
-     * @return  double PAR_ID
+     *
+     * @return double PAR_ID
      */
     public double getPAR_ID() {
         return PAR_ID;
@@ -83,7 +85,8 @@ public class Propriedade {
 
     /**
      * getPAR_NUM method returns the PAR_NUM of the property.
-     * @return  String PAR_NUM
+     *
+     * @return String PAR_NUM
      */
     public String getPAR_NUM() {
         return PAR_NUM;
@@ -91,7 +94,8 @@ public class Propriedade {
 
     /**
      * getShape_length method returns the shape length of the property.
-     * @return  double shape_length
+     *
+     * @return double shape_length
      */
     public double getShape_length() {
         return shape_length;
@@ -99,7 +103,8 @@ public class Propriedade {
 
     /**
      * getShape_area method returns the shape area of the property.
-     * @return  double shape_area
+     *
+     * @return double shape_area
      */
     public double getShape_area() {
         return shape_area;
@@ -107,7 +112,8 @@ public class Propriedade {
 
     /**
      * getGeometry method returns the geometry of the property.
-     * @return  String geometry
+     *
+     * @return String geometry
      */
     public String getGeometry() {
         return geometry;
@@ -115,7 +121,8 @@ public class Propriedade {
 
     /**
      * getOWNER method returns the owner ID of the property.
-     * @return  int OWNER
+     *
+     * @return int OWNER
      */
     public int getOWNER() {
         return OWNER;
@@ -123,7 +130,8 @@ public class Propriedade {
 
     /**
      * getFreguesia method returns the freguesia of the property.
-     * @return  String freguesia
+     *
+     * @return String freguesia
      */
     public String getFreguesia() {
         return freguesia;
@@ -131,7 +139,8 @@ public class Propriedade {
 
     /**
      * getMunicipio method returns the municipality of the property.
-     * @return  String municipio
+     *
+     * @return String municipio
      */
     public String getMunicipio() {
         return municipio;
@@ -139,7 +148,8 @@ public class Propriedade {
 
     /**
      * getIlha method returns the island where the property is located.
-     * @return  String ilha
+     *
+     * @return String ilha
      */
     public String getIlha() {
         return ilha;
