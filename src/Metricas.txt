@@ -1,1 +1,2 @@
-Tendo em conta os gráficos de métricas disponibilizados pelo plugin Metrics Tree a qualidade do software do projeto parece ser boa
+Tendo em conta os gráficos de métricas disponibilizados pelo plugin Metrics Tree a qualidade do software do projeto parece ser boa.
+Consulte a printscreen "metricasES.png" para mais detalhes.
