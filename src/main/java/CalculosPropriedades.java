@@ -35,7 +35,7 @@ public class CalculosPropriedades {
                 case "freguesia":
                     corresponde = p.getFreguesia().equalsIgnoreCase(nome);
                     break;
-                case "municipo":
+                case "municipio":
                     corresponde = p.getMunicipio().equalsIgnoreCase(nome);
                     break;
                 case "ilha":

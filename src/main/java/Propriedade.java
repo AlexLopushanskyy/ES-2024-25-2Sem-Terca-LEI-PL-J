@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * Propriedade class represents a property with various attributes.
  */
@@ -145,5 +147,18 @@ public class Propriedade {
 
     public void setOWNER(int originalOwnerP2) {
         this.OWNER = originalOwnerP2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Propriedade that = (Propriedade) o;
+        return ID == that.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 }

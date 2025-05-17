@@ -1,9 +1,6 @@
 import junit.framework.TestCase;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The type Sugestor de trocas test.
@@ -18,12 +15,12 @@ public class SugestorDeTrocasTest extends TestCase {
         grafoPropriedades = new HashMap<>();
 
         Propriedade p1 = new Propriedade(1, 123.45, "P123", 100.5, 200.75, "geometryData", 10, "Freguesia1", "Municipio1", "Ilha1");
-        Propriedade p2 = new Propriedade(2, 124.45, "P124", 150.5, 300.75, "geometryData", 20, "Freguesia1", "Municipio1", "Ilha1");
-        Propriedade p3 = new Propriedade(3, 125.45, "P125", 200.5, 400.75, "geometryData", 30, "Freguesia2", "Municipio2", "Ilha2");
+        Propriedade p2 = new Propriedade(2, 124.45, "P124", 110.5, 205.75, "geometryData", 20, "Freguesia1", "Municipio1", "Ilha1");
+        Propriedade p3 = new Propriedade(3, 125.45, "P125", 120.5, 195.75, "geometryData", 30, "Freguesia2", "Municipio2", "Ilha2");
 
-        grafoPropriedades.put(p1, Set.of(p2));
-        grafoPropriedades.put(p2, Set.of(p1));
-        grafoPropriedades.put(p3, Set.of());
+        grafoPropriedades.put(p1, new HashSet<>(List.of(p2)));
+        grafoPropriedades.put(p2, new HashSet<>(List.of(p1)));
+        grafoPropriedades.put(p3, new HashSet<>()); //
 
         sugestorDeTrocas = new SugestorDeTrocas(grafoPropriedades);
     }
