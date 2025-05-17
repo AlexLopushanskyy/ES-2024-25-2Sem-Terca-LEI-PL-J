@@ -33,7 +33,7 @@ public class GrafoPropriedades {
         STRtree spatialIndex = new STRtree();  // Spatial index para otimizar a busca de vizinhos
         WKTReader reader = new WKTReader();    // Leitor WKT para converter geometria
 
-        // Primeiro, carregue todas as geometrias no índice espacial
+
         try {
             // Adiciona todas as propriedades ao grafo como nós, incluindo as isoladas
             for (Propriedade p : propriedades) {
